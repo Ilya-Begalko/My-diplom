@@ -48,12 +48,6 @@ namespace TanksGame.Base
                     return (T) Objects[key];
                 }
 
-                // Спросить!
-
-                else if(key == "hardReset"){
-                    Process.GetCurrentProcess().Kill();
-                }
-
                 return default;
             }
             catch
