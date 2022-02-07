@@ -1,20 +1,24 @@
-image: mcr.microsoft.com/dotnet/sdk:5.0
+image:  mcr.microsoft.com/dotnet/sdk:5.0
 
-stages:
+stages:     
   - build
   - test
 
-build_job:
+
+build-job: 
+  only:
+  - master
+  - merge_requests
   stage: build
   script:
-    - dotnet restore
-    - dotnet build
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      dotnet restore
+      dotnet build
 
-test_job:
-  stage: test
+
+unit-test-job: 
+  only:
+  - master
+  - merge_requests
+  stage: test   
   script:
-    - dotnet test
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      dotnet test
