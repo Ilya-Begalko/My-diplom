@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="GameObjects\**" />
+		<EmbeddedResource Remove="GameObjects\**" />
+		<None Remove="GameObjects\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Utils\Utils.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Data\CollisionTreesData\" />
+		<Folder Include="Services\Abstractions\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Data\CollisionTreesData\lt_lt.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+</Project>
