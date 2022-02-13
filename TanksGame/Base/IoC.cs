@@ -7,6 +7,7 @@ namespace TanksGame.Base
 {
     public static class IoC
     {
+        public delegate object Creator(params object[] args);
         private static readonly Dictionary<string, object> Objects = new Dictionary<string, object>();
         private static readonly Dictionary<string, object> Strategies = new Dictionary<string, object>();
 
