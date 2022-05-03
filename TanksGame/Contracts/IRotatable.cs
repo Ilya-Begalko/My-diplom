@@ -2,9 +2,6 @@
 
 namespace TanksGame.Contracts
 {
-    /// <summary>
-    ///     Объект, умеющий поворачивать
-    /// </summary>
     public interface IRotatable : IManageable
     {
         Vector Direction { get; set; }

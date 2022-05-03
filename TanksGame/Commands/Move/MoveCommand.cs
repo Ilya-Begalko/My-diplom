@@ -4,9 +4,6 @@ using TanksGame.Contracts;
 
 namespace TanksGame.Commands.Move
 {
-    /// <summary>
-    ///     Команда движения
-    /// </summary>
     public class MoveCommand : ICommand
     {
         private readonly IMovable _movable;

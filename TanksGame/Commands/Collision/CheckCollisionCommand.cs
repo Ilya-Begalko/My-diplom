@@ -7,10 +7,7 @@ using TanksGame.Commands.Abstractions;
 
 namespace TanksGame.Commands.Collision
 {
-    /// <summary>
-    ///     Команда, которая проверяет факт столкновения двух объектов и генерирует событие
-    ///     в случае столкновения
-    /// </summary>
+    ///     Команда, которая проверяет факт столкновения двух объектов и генерирует событие в случае столкновения
     public class CheckCollisionCommand : IEmitCommand
     {
         private readonly IGameObject _firstMovableObject;

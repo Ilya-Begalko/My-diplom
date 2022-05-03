@@ -4,10 +4,7 @@ using TanksGame.Services.Abstractions;
 
 namespace TanksGame.Commands.Collision
 {
-    /// <summary>
-    ///     Команда, которая создает на основе файла с данными о наличии / отсутствии столкновений
-    ///     дерево принятия решений
-    /// </summary>
+    ///     Команда, которая создает на основе файла с данными о наличии / отсутствии столкновений дерево принятия решений
     public class CreateCollisionTreeCommand : ICommand
     {
         private readonly string _dataPath;

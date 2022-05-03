@@ -7,9 +7,7 @@ using Utils.Numeric.Extensions;
 
 namespace TanksGame.Commands.Rotate
 {
-    /// <summary>
-    ///     Комманда поворота вокруг собственной оси (изменение направления)
-    /// </summary>
+    ///     Комманда поворота вокруг собственной оси
     public class RotateSelfCommand : ICommand
     {
         private readonly IRotatable _rotatable;
