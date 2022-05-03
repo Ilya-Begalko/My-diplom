@@ -7,9 +7,10 @@ namespace TanksGame.Base
 {
     public static class IoC
     {
-        public delegate object Creator(params object[] args);
         private static readonly Dictionary<string, object> Objects = new Dictionary<string, object>();
         private static readonly Dictionary<string, object> Strategies = new Dictionary<string, object>();
+        public static Dictionary<string, Action> Acts = new Dictionary<string, Action>();
+
 
         static IoC()
         {
@@ -19,37 +20,31 @@ namespace TanksGame.Base
 
         public static T Resolve<T>(string key, params object[] args)
         {
+            Dictionary<string, Func<string, T>> newListStrategies = new Dictionary<string, Func<string, T>>();
+
+            Func<string, T> GetStrategies = (string key) =>
+            {
+               var strategy = (Func<object[], T>)Strategies[key];
+               return strategy.Invoke(args);
+            };
+
+            Func<string, T> GetTree = (string key) => (T)Objects[key];
+
+            Func<string, T> DependencyRegistration = (string key) =>
+            {
+                if (key == "IoC.register" && (string)args[0] == "collisionTree")
+                    Strategies["collisionTree"] = args[1];
+                return default;
+            };
+
+            newListStrategies.Add("IoC.register", DependencyRegistration);
+            newListStrategies.Add("collisionTree", GetStrategies);
+            newListStrategies.Add("collisionTrees", GetTree);
+            newListStrategies.Add("collisionTreeBuilder", GetTree);
+
             try
             {
-                // секция регистрации
-                if (key == "IoC.register")
-                {
-                    if ((string)args[0] == "collisionTree")
-                    {
-                        Strategies["collisionTree"] = args[1];
-                    }
-
-                    // TODO регистрация других зависимостей
-                }
-
-                // секция разрешения
-                else if (key == "collisionTree")
-                {
-                    var strategy = (Func<object[], T>)Strategies[key];
-                    return strategy.Invoke(args);
-                }
-
-                else if (key == "collisionTrees")
-                {
-                    return (T)Objects[key];
-                }
-
-                else if (key == "collisionTreeBuilder")
-                {
-                    return (T) Objects[key];
-                }
-
-                return default;
+                return newListStrategies.TryGetValue(key, out var strategy) ? strategy.Invoke(key) : default;
             }
             catch
             {
